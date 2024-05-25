@@ -6,7 +6,7 @@ from logica_juego import inicializar_juego, jugar_turno
 class TresEnRayaApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Triki traka")
+        self.root.title("Tres en Raya")
 
         self.jugadores = [["Jugador 1", "X"], ["Jugador 2", "O"]]
         self.juego_en_curso = False
@@ -32,7 +32,7 @@ class TresEnRayaApp:
         for i in range(3):
             for j in range(3):
                 button = tk.Button(self.frame_tablero, text='', width=10, height=3,
-                                command=lambda i=i, j=j: self.on_button_click(i, j))
+                                    command=lambda i=i, j=j: self.on_button_click(i, j))
                 button.grid(row=i, column=j)
                 self.buttons[i][j] = button
 
@@ -62,6 +62,7 @@ class TresEnRayaApp:
         self.update_buttons()
         self.label.config(text=f"Turno de: {self.jugadores[self.jugador_actual][0]}")
         self.reiniciar_button.config(state=tk.NORMAL)
+        self.enable_buttons()
 
     def reiniciar_partida(self):
         self.nueva_partida()
@@ -70,11 +71,17 @@ class TresEnRayaApp:
         ganador = self.jugadores[self.jugador_actual][0]
         messagebox.showinfo("¡Ganador!", f"{ganador} ha ganado la partida.")
         self.disable_buttons()
+        self.reiniciar_button.config(state=tk.NORMAL)
 
     def disable_buttons(self):
         for i in range(3):
             for j in range(3):
                 self.buttons[i][j].config(state='disabled')
+
+    def enable_buttons(self):
+        for i in range(3):
+            for j in range(3):
+                self.buttons[i][j].config(state='normal')
 
     def update_buttons(self):
         for i in range(3):
