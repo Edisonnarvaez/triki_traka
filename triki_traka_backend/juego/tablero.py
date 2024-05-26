@@ -20,10 +20,10 @@ def comprobar_ganador(jugador, tablero_actual):
     # Comprobar filas y columnas
     for i in range(3):
         if all(tablero_actual[i][j] == simbolo for j in range(3)) or \
-           all(tablero_actual[j][i] == simbolo for j in range(3)):
+            all(tablero_actual[j][i] == simbolo for j in range(3)):
             return True
     # Comprobar diagonales
     if all(tablero_actual[i][i] == simbolo for i in range(3)) or \
-       all(tablero_actual[i][2 - i] == simbolo for i in range(3)):
+        all(tablero_actual[i][2 - i] == simbolo for i in range(3)):
         return True
     return False

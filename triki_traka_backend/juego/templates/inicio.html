@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<h2>Bienvenido a Triki Traka</h2>
+<p>Elige una opción:</p>
+<ul>
+    <li><a href="{% url 'obtener_partidas' %}">Ver partidas existentes</a></li>
+    <li><a href="{% url 'crear_partida' %}">Crear nueva partida</a></li>
+</ul>
+{% endblock %}

@@ -1,7 +1,7 @@
 # gui.py
 import tkinter as tk
 from tkinter import messagebox
-from logica_juego import inicializar_juego, jugar_turno
+from triki_traka_backend.juego.logica_juego import inicializar_juego, jugar_turno
 
 class TresEnRayaApp:
     def __init__(self, root):
