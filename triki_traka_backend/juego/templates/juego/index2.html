@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Bienvenido a Triki Traka{% endblock %}
+
+{% block contenido %}
+<h2>Bienvenido a Triki Traka</h2>
+<p>Elige una opción:</p>
+<ul>
+    <li><a href="{% url 'obtener_partidas' %}">Ver partidas existentes</a></li>
+    <li><a href="{% url 'crear_partida' %}">Crear nueva partida</a></li>
+</ul>
+{% endblock %}
+<form action="{% url 'crear_partida' %}" method="post">
+    {% csrf_token %}
+    <!-- Aquí puedes agregar campos adicionales si los necesitas -->
+    <button type="submit">Crear Partida</button>
+    
+</form>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triki Traka</title>
-    <!-- Enlazar archivo CSS -->
+    <title>{% block title %}Triki Traka{% endblock %}</title>
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
@@ -27,7 +27,6 @@
         <p>&copy; 2024 Triki Traka. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Enlazar archivo JavaScript -->
     <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 </html>
