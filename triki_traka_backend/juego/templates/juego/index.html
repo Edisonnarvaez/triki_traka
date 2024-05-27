@@ -22,21 +22,18 @@
         </ul>
         
         <form action="{% url 'crear_partida' %}" method="post">
-            {% csrf_token %}
-            <!-- Aquí puedes agregar campos adicionales si los necesitas -->
+            {% csrf_token %}            
             <button type="submit">Crear Partida</button>
-            
-        </form>
-
-        
-        <div id="game-info">
             <button id="reiniciar-btn">Reiniciar Juego</button>
+        </form>
+        
+        <div id="game-info">           
             <p>Turno de: <span id="turno-jugador"></span></p>
             <h2>Tablero de Juego</h2>
         </div>
         
         <div id="game-board">
-            <!-- Aquí irá el tablero de juego, generado dinámicamente -->
+            
         </div>
     </main>
 
