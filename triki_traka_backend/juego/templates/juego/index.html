@@ -24,10 +24,11 @@
         <form action="{% url 'crear_partida' %}" method="post">
             {% csrf_token %}            
             <button type="submit">Crear Partida</button>
-            <button id="reiniciar-btn">Reiniciar Juego</button>
+            
         </form>
         
-        <div id="game-info">           
+        <div id="game-info">  
+            <button id="reiniciar-btn">Reiniciar Juego</button>        
             <p>Turno de: <span id="turno-jugador"></span></p>
             <h2>Tablero de Juego</h2>
         </div>
