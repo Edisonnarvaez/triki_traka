@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Triki Traka{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Triki Traka</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'obtener_partidas' %}">Partidas</a></li>
+                <li><a href="{% url 'crear_partida' %}">Crear Partida</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block contenido %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Triki Traka. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

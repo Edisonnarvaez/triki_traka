@@ -1,0 +1,47 @@
+//index
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Triki Traka{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Triki Traka</h1>
+        
+    </header>
+
+    <main>
+        <h2>Bienvenido a Triki Traka</h2>
+        <p>Elige una opción:</p>
+        <ul>
+            <li><a href="{% url 'obtener_partidas' %}">Ver partidas existentes</a></li>
+        </ul>
+        
+        <form action="{% url 'crear_partida' %}" method="post">
+            {% csrf_token %}            
+            <button type="submit">Crear Partida</button>
+            
+        </form>
+        
+        <div id="game-info">  
+            <button id="reiniciar-btn">Reiniciar Juego</button>        
+            <p>Turno de: <span id="turno-jugador"></span></p>
+            <h2>Tablero de Juego</h2>
+        </div>
+        
+        <div id="game-board">
+            
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Triki Traka. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

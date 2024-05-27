@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Partida</title>
+</head>
+<body>
+    <h1>Crear Nueva Partida</h1>
+    <form action="{% url 'crear_partida' %}" method="post">
+        {% csrf_token %}
+        <label for="nombre">Nombre de la partida:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br>
+        <label for="jugador1">Nombre del Jugador 1:</label>
+        <input type="text" id="jugador1" name="jugador1" required>
+        <br>
+        <label for="jugador2">Nombre del Jugador 2:</label>
+        <input type="text" id="jugador2" name="jugador2" required>
+        <br>
+        <button type="submit">Crear Partida</button>
+    </form>
+</body>
+</html>
