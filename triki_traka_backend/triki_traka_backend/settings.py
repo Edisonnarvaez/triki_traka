@@ -26,8 +26,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', default=0))
 
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
+#ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
 
+allowed_hosts_env = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost')
+
+# Divide la cadena de hosts en una lista
+ALLOWED_HOSTS = allowed_hosts_env.split(' ')
 
 # Application definition
 
@@ -54,21 +58,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'triki_traka_backend.urls'
 
-# TEMPLATES = [
-#     {
-#         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-#         'DIRS': [],
-#         'APP_DIRS': True,
-#         'OPTIONS': {
-#             'context_processors': [
-#                 'django.template.context_processors.debug',
-#                 'django.template.context_processors.request',
-#                 'django.contrib.auth.context_processors.auth',
-#                 'django.contrib.messages.context_processors.messages',
-#             ],
-#         },
-#     },
-# ]
 # Definir la carpeta de plantillas
 TEMPLATES = [
     {
@@ -99,16 +88,6 @@ WSGI_APPLICATION = 'triki_traka_backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'local_pgdb',
-#         'USER': 'postgres',  # El usuario por defecto de PostgreSQL
-#         'PASSWORD': '12345',  # La contraseña que has configurado en tu docker-compose.yml
-#         'HOST': 'localhost',  # O la dirección IP de tu contenedor de PostgreSQL
-#         'PORT': '5433',       # El puerto que has mapeado en tu archivo docker-compose.yml
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.sqlite3'),
