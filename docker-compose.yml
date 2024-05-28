@@ -16,7 +16,7 @@ services:
       - ./triki_traka_backend/:/usr/src/triki_traka_backend
       - ./wait-for-it.sh:/wait-for-it.sh
     ports:
-      - '54000:8000'
+      - "57000-57002:8000"
     env_file:
       - ./.env.dev
     links:
