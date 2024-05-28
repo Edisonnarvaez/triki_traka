@@ -1,8 +1,8 @@
 # utils.py
 import os
 
+
 def pedir_coordenadas():
-    """Pide al jugador que ingrese coordenadas válidas"""
     while True:
         try:
             coordenada_fila, coordenada_columna = map(int, input("Elige coordenadas (fila columna): ").split())
@@ -13,6 +13,6 @@ def pedir_coordenadas():
         except ValueError:
             print("Entrada inválida. Por favor, ingresa números separados por un espacio.")
 
+
 def limpiar_pantalla():
-    """Función para limpiar la pantalla"""
     os.system("cls" if os.name == "nt" else "clear")

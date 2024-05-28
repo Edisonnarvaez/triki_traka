@@ -23,9 +23,3 @@ urlpatterns = [
     path('api/', include('juego.urls')),  # Incluye las URLs de la aplicación 'juego'
     path('', include('juego.urls')),  # Redirige la URL principal a las URLs de 'juego'
 ]
-# urlpatterns = [
-#     path('admin/', admin.site.urls),
-#     path('partidas/', views.obtener_partidas, name='obtener_partidas'),
-#     path('partidas/crear/', views.crear_partida, name='crear_partida'),
-#     path('partidas/<int:partida_id>/', views.gestionar_partida, name='gestionar_partida'),
-# ]

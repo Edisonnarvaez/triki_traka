@@ -1,6 +1,6 @@
 FROM python:3.11.9-alpine
 
-WORKDIR /Proyectos/Python/triki_traka/triki_traka_backend
+WORKDIR /usr/src/triki_traka_backend
 
 ENV PYTHONDONTWRITEBYCODE 1
 ENV PYTHONNUNBUFFERED 1
@@ -15,7 +15,7 @@ RUN apk add --no-cache --virtual .build-deps build-base linux-headers \
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY ./entrypoint.sh /Proyectos/Python/triki_traka/triki_traka_backend
+COPY ./entrypoint.sh /usr/src/triki_traka_backend
 
 COPY . .
 
