@@ -21,13 +21,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY') 
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', default=0))
 
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
+# ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
 
+allowed_hosts_env = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost')
+
+# Divide la cadena de hosts en una lista
+ALLOWED_HOSTS = allowed_hosts_env.split(' ')
 
 # Application definition
 
@@ -54,21 +58,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'triki_traka_backend.urls'
 
-# TEMPLATES = [
-#     {
-#         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-#         'DIRS': [],
-#         'APP_DIRS': True,
-#         'OPTIONS': {
-#             'context_processors': [
-#                 'django.template.context_processors.debug',
-#                 'django.template.context_processors.request',
-#                 'django.contrib.auth.context_processors.auth',
-#                 'django.contrib.messages.context_processors.messages',
-#             ],
-#         },
-#     },
-# ]
 # Definir la carpeta de plantillas
 TEMPLATES = [
     {
@@ -99,25 +88,15 @@ WSGI_APPLICATION = 'triki_traka_backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'local_pgdb',
-#         'USER': 'postgres',  # El usuario por defecto de PostgreSQL
-#         'PASSWORD': '12345',  # La contraseña que has configurado en tu docker-compose.yml
-#         'HOST': 'localhost',  # O la dirección IP de tu contenedor de PostgreSQL
-#         'PORT': '5433',       # El puerto que has mapeado en tu archivo docker-compose.yml
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.sqlite3'),
-        'NAME': os.environ.get('SQL_DATA_BASE', BASE_DIR / 'db.sqlite3'),
+        'NAME': os.environ.get('SQL_DATA_BASE', 'db.sqlite3'),
         'USER': os.environ.get('SQL_USER', 'user'),
         'PASSWORD': os.environ.get('SQL_PASSWORD', 'password'),
-        'HOST': os.environ.get('SQL_HOST', 'localHost'),
+        'HOST': os.environ.get('SQL_HOST', 'localhost'),
         'PORT': os.environ.get('SQL_PORT', '5432')
-        }
+    }
 }
 
 # Password validation
@@ -154,7 +133,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-#STATIC_URL = 'static/' habilitar en  caso de falla
+# STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

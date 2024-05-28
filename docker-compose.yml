@@ -1,9 +1,9 @@
 services:
-  web_dev:
+  web:
     restart: always
     build: ./triki_traka_backend
     deploy:
-      replicas: 3
+      replicas: 2
       resources:
         limits:
           cpus: "0.15"
@@ -11,38 +11,39 @@ services:
         reservations:
           cpus: "0.1"
           memory: 256M
-    command: python manage.py runserver 0.0.0.0:8000
+    command: ./wait-for-it.sh db:5432 -- python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./triki_traka_backend/:/Proyectos/Python/triki_traka/triki_traka_backend
+      - ./triki_traka_backend/:/usr/src/triki_traka_backend
+      - ./wait-for-it.sh:/wait-for-it.sh
     ports:
-      - 52000:8000
+      - "57000-57002:8000"
     env_file:
       - ./.env.dev
+    links:
+      - db:db
     depends_on:
       - db
-    networks:
-      - dev_env_network
 
-  users_api:
-    build:
-      context: ./triki_traka_backend
-    deploy:
-      replicas: 10
-      resources:
-        limits:
-          cpus: "0.15"
-          memory: 512M
-        reservations:
-          cpus: "0.1"
-          memory: 256M
-    expose:
-      - "3000-3010:3000"
-    volumes:
-      - ./triki_traka_backend/:/Proyectos/Python/triki_traka/triki_traka_backend
-    depends_on:
-      - db
-    networks:
-      - dev_env_network
+  # users_api:
+  #   build:
+  #     context: ./triki_traka_backend
+  #   deploy:
+  #     replicas: 2
+  #     resources:
+  #       limits:
+  #         cpus: "0.15"
+  #         memory: 512M
+  #       reservations:
+  #         cpus: "0.1"
+  #         memory: 256M
+  #   ports:
+  #     - "3000-3002:3000"
+  #   volumes:
+  #     - ./triki_traka_backend/:/usr/src/triki_traka_backend
+  #   depends_on:
+  #     - db
+  #   networks:
+  #     - dev_env_network
 
   db:
     restart: always
@@ -56,13 +57,11 @@ services:
           cpus: "0.1"
           memory: 256M
     ports:
-      - 5432:5432
+      - '5432:5432'
     volumes:
       - ./postgres_data:/var/lib/postgres/data
     env_file:
       - ./.env.dev.db
-    networks:
-      - dev_env_network
 
   pgadmin:
     image: dpage/pgadmin4
@@ -70,27 +69,20 @@ services:
       - ./.env.dev.pg
     ports:
       - "53000:80"
+    links:
+      - db:db
     depends_on:
       - db
-    networks:
-      - dev_env_network
 
   nginx:
     restart: always
     build: ./nginx
     ports:
-      - 80:80
+      - '80:80'
     depends_on:
-      - web_dev
-      - users_api
-    networks:
-      - dev_env_network
+      - web
+
 
 volumes:
   postgres_data:
-  users_pgdata:
-  pgadmin-data:
 
-networks:
-  dev_env_network:
-    driver: bridge
